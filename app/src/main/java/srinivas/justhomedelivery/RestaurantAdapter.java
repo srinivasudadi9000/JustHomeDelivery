@@ -1,13 +1,19 @@
 package srinivas.justhomedelivery;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -48,7 +54,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         Drawable d = context.getResources().getDrawable(reslist.get(position).getImgdrawable());
         holder.imageView.setBackground(d);
         holder.ratingBar.setRating(Float.parseFloat(reslist.get(position).getRating()));
-        holder.res_address.setText(reslist.get(position).getAddress());
+        holder.res_address.setText(reslist.get(position).getResdes());
         holder.km.setText(reslist.get(position).getAddress());
     }
 
@@ -59,17 +65,28 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
 
 
     public class Recceholder extends RecyclerView.ViewHolder {
-        TextView outletname_tv,res_address,km;
+        TextView outletname_tv, res_address, km;
         ImageView imageView;
         RatingBar ratingBar;
+        ImageView call;
 
-        public Recceholder(View itemView) {
+        public Recceholder(final View itemView) {
             super(itemView);
             km = (TextView) itemView.findViewById(R.id.km);
             ratingBar = (RatingBar) itemView.findViewById(R.id.myratingbar);
             imageView = (ImageView) itemView.findViewById(R.id.man_image);
             outletname_tv = (TextView) itemView.findViewById(R.id.res_name);
             res_address = (TextView) itemView.findViewById(R.id.res_address);
+            call = (ImageView) itemView.findViewById(R.id.call);
+            call.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+
+                    intent.setData(Uri.parse("tel:" + reslist.get(getAdapterPosition()).getPhone()));
+                     itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 

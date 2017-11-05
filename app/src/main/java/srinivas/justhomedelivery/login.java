@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -45,10 +48,24 @@ public class login extends Activity implements View.OnClickListener {
             case R.id.signup_tv:
                 break;
             case R.id.login_bt:
-                Intent login = new Intent(getApplicationContext(),Home.class);
-                startActivity(login);
-                finish();
-                break;
+                if (!validateEmailAddress(email_etv.getText().toString())){
+                    Validation.showalert("Enter Valid Email Address",login.this);
+                }else if(password_etv.getText().toString().length()<6){
+                    Validation.showalert("Password length should be more than 6",login.this);
+                }else{
+                    Intent login = new Intent(getApplicationContext(),Home.class);
+                    startActivity(login);
+                    finish();
+                    break;
+                }
+
         }
+    }
+    private boolean validateEmailAddress(String emailAddress){
+        String  expression="^[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence inputStr = emailAddress;
+        Pattern pattern = Pattern.compile(expression,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        return matcher.matches();
     }
 }
