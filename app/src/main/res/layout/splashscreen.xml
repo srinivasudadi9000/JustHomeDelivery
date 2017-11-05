@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:gravity="center_vertical"
+    tools:context="srinivas.justhomedelivery.Splashscreen">
+
+<ImageView
+    android:id="@+id/man"
+    android:src="@drawable/man"
+    android:layout_width="wrap_content"
+    android:layout_height="200dp"
+    />
+    <TextView
+        android:id="@+id/heading_tv"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/man"
+        android:text="Just Home Delivery"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
